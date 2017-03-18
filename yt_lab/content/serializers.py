@@ -7,7 +7,7 @@ class SourceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Source
-        fields = ('url', 'title', 'typ')
+        fields = ('id', 'url', 'title', 'typ')
 
 
 class VideoSerializer(serializers.ModelSerializer):

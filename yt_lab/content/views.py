@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from .models import Source, Video
@@ -10,6 +10,6 @@ class ContentSourceViewset(viewsets.ModelViewSet):
     serializer_class = SourceSerializer
 
 
-class GoupVideosViewSet(NestedViewSetMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class VideosGroupViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
