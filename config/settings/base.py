@@ -45,7 +45,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'yt_lab.users.apps.UsersConfig',
+    'yt_lab.content.apps.ContentConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -98,8 +98,13 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+# -----------------------------------DATABASES-------------------------------------------
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///yt_lab'),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ROOT_DIR('db.sqlite3'),
+        'ATOMIC_REQUESTS': True
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
