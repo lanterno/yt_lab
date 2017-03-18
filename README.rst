@@ -1,7 +1,7 @@
 YouTube Lab
 ===========
 
-YouTube Lab is a service that simply takes in a link for a playlist or a channel and returns a lits of available videos in that channel or playlist. The list is periodically updated.
+YouTube Lab is a service that simply takes in a link for a playlist or a channel and returns a list of available videos in that channel or playlist. The list is periodically updated.
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
