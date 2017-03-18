@@ -68,6 +68,7 @@ To run a celery worker:
 
     cd yt_lab
     celery -A yt_lab.taskapp worker -l info
+    celery -A yt_lab.taskapp beat
 
 Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
 

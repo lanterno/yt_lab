@@ -22,13 +22,29 @@ SCHEMA = Document(
                 description="""
                     Add a new content source ex. playlist
 
-                    Provide a url to the playlist of channel you want to Crawl
+                    Provide a url to the playlist or channel you want to Crawl
                 """,
                 fields=[
                     Field(
                         name='url',
                         required=True,
                         location='formData',
+                    )
+                ]
+            ),
+            'remove_source': Link(
+                url=CONTENT_BASE_URL + 'sources/{pk}/',
+                action='delete',
+                description="""
+                    Remove an existing source from the database
+
+                    Provide pk to the playlist or channel you want to remove
+                """,
+                fields=[
+                    Field(
+                        name='pk',
+                        required=True,
+                        location='path',
                     )
                 ]
             ),

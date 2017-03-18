@@ -3,6 +3,9 @@ from celery import Celery
 from django.apps import apps, AppConfig
 from django.conf import settings
 
+from celery.decorators import periodic_task
+from celery.task.schedules import crontab
+
 
 if not settings.configured:
     # set the default Django settings module for the 'celery' program.
@@ -23,17 +26,27 @@ class CeleryConfig(AppConfig):
         installed_apps = [app_config.name for app_config in apps.get_app_configs()]
         app.autodiscover_tasks(lambda: installed_apps, force=True)
 
-        if hasattr(settings, 'RAVEN_CONFIG'):
-            # Celery signal registration
-            from raven import Client as RavenClient
-            from raven.contrib.celery import register_signal as raven_register_signal
-            from raven.contrib.celery import register_logger_signal as raven_register_logger_signal
 
-            raven_client = RavenClient(dsn=settings.RAVEN_CONFIG['DSN'])
-            raven_register_logger_signal(raven_client)
-            raven_register_signal(raven_client)
+@app.task
+def update_source(source_id):
+    from yt_lab.content.utils import update_source_info, update_source_videos
+    from yt_lab.content.models import Source
+
+    source = Source.objects.get(id=source_id)
+    update_source_info(source)
+    update_source_videos(source)
 
 
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.request))  # pragma: no cover
+@periodic_task(
+    # this makes the task happen every day at midnight
+    # to change: http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
+    run_every=(crontab(minute=0, hour='*/3',)),
+    name="periodic_videos_update",
+    ignore_result=True
+)
+def periodic_videos_update():
+    from yt_lab.content.utils import update_source_videos
+    from yt_lab.content.models import Source
+
+    for source in Source.objects.all():
+        update_source_videos(source)

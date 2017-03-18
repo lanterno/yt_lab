@@ -242,9 +242,6 @@ AUTHENTICATION_BACKENDS = [
 
 # ######### CELERY
 INSTALLED_APPS += ['yt_lab.taskapp.celery.CeleryConfig']
-BROKER_URL = env('CELERY_BROKER_URL', default='django://')
-if BROKER_URL == 'django://':
-    CELERY_RESULT_BACKEND = 'redis://'
-else:
-    CELERY_RESULT_BACKEND = BROKER_URL
+BROKER_URL = env('CELERY_BROKER_URL', default='redis://')
+CELERY_RESULT_BACKEND = BROKER_URL
 # ######### END CELERY
