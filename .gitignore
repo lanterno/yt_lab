@@ -64,3 +64,4 @@ yt_lab/media/
 
 
 staticfiles/
+db.sqlite3
