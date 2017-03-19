@@ -56,7 +56,7 @@ node_modules/
 .sass-cache
 
 # virtual environments
-.env
+# .env  commented out for now for easier testing by new users
 
 # User-uploaded media
 yt_lab/media/
