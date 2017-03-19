@@ -31,7 +31,6 @@ class SourceSerializer(serializers.ModelSerializer):
             data['typ'] = Source.PLAYLIST
         else:
             raise serializers.ValidationError("Source URL couldn't be validated")
-        print('data')
         return data
 
 
