@@ -35,3 +35,6 @@ celery==4.0.2
 djangorestframework==3.6.2
 django-rest-swagger==2.1.2
 drf-extensions==0.3.1
+
+# youtube APIs
+google-api-python-client
