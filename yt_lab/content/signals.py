@@ -6,7 +6,11 @@ from .models import Source
 
 
 @receiver(post_save, sender=Source)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
+def auto_sync_source(sender, instance=None, created=False, **kwargs):
+    '''
+    This signals add an update_source celery call to the queue
+    which in tern should update the created object will needed details and videos
+    '''
     if created:
         update_source.delay(
             source_id=instance.pk
