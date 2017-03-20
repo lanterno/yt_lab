@@ -31,5 +31,5 @@ class Video(models.Model):
     title = models.CharField(max_length=400)
     duration = models.DurationField()
     views_count = models.PositiveIntegerField()
-    thmubnail = models.URLField()
+    thumbnail = models.URLField()
     image = models.URLField()
