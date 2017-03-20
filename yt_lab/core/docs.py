@@ -66,6 +66,25 @@ SCHEMA = Document(
                     )
                 ]
             ),
+            'download_video': Link(
+                url=CONTENT_BASE_URL + 'sources/{pk}/videos/{video_id}/download/',
+                action='get',
+                description="""
+                    Get direct download link for youtube video
+                """,
+                fields=[
+                    Field(
+                        name='pk',
+                        required=True,
+                        location='path'
+                    ),
+                    Field(
+                        name='video_id',
+                        required=True,
+                        location='path'
+                    )
+                ]
+            ),
         }
     }
 )
