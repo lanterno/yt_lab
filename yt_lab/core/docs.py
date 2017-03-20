@@ -51,7 +51,7 @@ SCHEMA = Document(
         },
         'Videos': {
             'list_videos_from_source': Link(
-                url=CONTENT_BASE_URL + 'sources/{pk}/videos',
+                url=CONTENT_BASE_URL + 'sources/{source_id}/videos',
                 action='get',
                 description="""
                     Lists all the videos related to a certain source
@@ -60,21 +60,21 @@ SCHEMA = Document(
                 """,
                 fields=[
                     Field(
-                        name='pk',
+                        name='source_id',
                         required=True,
                         location='path'
                     )
                 ]
             ),
             'download_video': Link(
-                url=CONTENT_BASE_URL + 'sources/{pk}/videos/{video_id}/download/',
+                url=CONTENT_BASE_URL + 'sources/{source_id}/videos/{video_id}/download/',
                 action='get',
                 description="""
                     Get direct download link for youtube video
                 """,
                 fields=[
                     Field(
-                        name='pk',
+                        name='source_id',
                         required=True,
                         location='path'
                     ),
