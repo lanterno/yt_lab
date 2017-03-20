@@ -19,11 +19,13 @@ Moved to settings_.
 
 Installation Steps
 --------------------
-```
-pip install -r requirements/local.txt
-sudo apt-get install redis-server
-python manage.py migrate
-```
+
+.. code-block:: bash
+
+    pip install -r requirements/local.txt
+    sudo apt-get install redis-server
+    python manage.py migrate
+
 
 Run Celery
 ^^^^^^
@@ -53,6 +55,26 @@ after that, you can try and list all the sources to see if the sources are updat
 
 After a couple of seconds from creating the source, you can checkout the videos that we have retrieved from that
 source by navigating to the videos tab and providing the id of any resource you created.
+
+here's some technical points I considered while building this:
+
+* Used the same youtube IDs in our own tables
+* Prevented duplicate sources(a playlist, channel, or a user is considered a source or a content source)
+* Used Swagger to document the APIs and for easier testing by frontend devs and users
+* One other big thing is the use or REGEX to handle the inputted URL and allow as many patterns as possible:
+    * URL must be a youtube link
+    * URL doesn't need to be in a very specific format, so any inner page in the channel page would work
+    * users and channels both are considered channels and the system handles and understands both of them
+* Django signals is used to facilitate and divide different concerns
+* Celery is used to handle ALL the Youtube crawling
+* celery beat updates the videos every 3 hours
+* Finally, Heroku settings and Docker configurations are available for easier deployment on different platforms. 
+
+Current limitations and future improvements:
+
+* I didn't save the images into local storage because that would cause a big hassle with the deployment and I wanted to show you the project deployed.
+* currently the system only pulls the first 50 videos from any source
+* The project has no tests currently and therefore could fail with any upgrade(highest priority)
 
 Sentry
 ^^^^^^
