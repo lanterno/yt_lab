@@ -38,7 +38,7 @@ def update_source(source_id):
 
 
 @periodic_task(
-    # this makes the task happen every day at midnight
+    # this makes the task happen every 3 hours starting at 3AM
     # to change: http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
     run_every=(crontab(minute=0, hour='*/3',)),
     name="periodic_videos_update",
