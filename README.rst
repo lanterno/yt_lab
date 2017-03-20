@@ -71,6 +71,7 @@ here's some technical points I considered while building this:
 * Finally, Heroku settings and Docker configurations are available for easier deployment on different platforms. 
 
 Current limitations and future improvements:
+
 * I didn't save the images into local storage because that would cause a big hassle with the deployment and I wanted to show you the project deployed.
 * currently the system only pulls the first 50 videos from any source
 * The project has no tests currently and therefore could fail with any upgrade(highest priority)
