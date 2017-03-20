@@ -23,4 +23,5 @@ django-anymail==0.8
 # --------------------------
 raven==6.0.0
 
-
+# Heroku
+dj_database_url
