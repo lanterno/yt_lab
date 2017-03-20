@@ -9,8 +9,14 @@ class SourceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Source
-        fields = ('id', 'url', 'title', 'typ', 'youtube_id')
-        read_only_fields = ('id', 'title', 'youtube_id', 'typ')
+        fields = ('id', 'url', 'title', 'typ')
+        read_only_fields = ('id', 'title', 'typ')
+
+    def validate_id(self, id):
+        if Source.objects.filter(id=id):
+            raise serializers.ValidationError({'error': 'This list/channel has already been added'})
+
+        return id
 
     def validate(self, data):
         '''
@@ -24,13 +30,15 @@ class SourceSerializer(serializers.ModelSerializer):
         playlist_pattern = re.compile(r'.*list=(?P<id>[ A-Za-z0-9_-]*)')
 
         if channel_pattern.match(data['url']):
-            data['youtube_id'] = channel_pattern.match(data['url']).groupdict()['id']
+            data['id'] = channel_pattern.match(data['url']).groupdict()['id']
             data['typ'] = Source.CHANNEL
         elif playlist_pattern.match(data['url']):
-            data['youtube_id'] = playlist_pattern.match(data['url']).groupdict()['id']
+            data['id'] = playlist_pattern.match(data['url']).groupdict()['id']
             data['typ'] = Source.PLAYLIST
         else:
             raise serializers.ValidationError("Source URL couldn't be validated")
+
+        data['id'] = self.validate_id(data['id'])
         return data
 
 

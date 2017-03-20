@@ -12,9 +12,11 @@ class Source(models.Model):
         (PLAYLIST, 'Playlist'),
         (CHANNEL, 'Channel'),
     )
+
+    id = models.CharField(max_length=150, primary_key=True, editable=False, unique=True)  # youtube_id
+
     url = models.URLField()
     title = models.CharField(max_length=400, null=True, blank=True)
-    youtube_id = models.CharField(max_length=150)
     typ = models.PositiveSmallIntegerField(choices=SOURCE_TYPES, null=True, blank=True)
 
     class Meta:
@@ -24,10 +26,10 @@ class Source(models.Model):
 class Video(models.Model):
 
     source = models.ForeignKey(Source, related_name='videos')
-
+    id = models.CharField(max_length=70, primary_key=True, editable=False)  # youtube_id
     url = models.URLField()
     title = models.CharField(max_length=400)
     duration = models.DurationField()
     views_count = models.PositiveIntegerField()
-    thmubnail = models.ImageField()
-    image = models.ImageField()
+    thmubnail = models.URLField()
+    image = models.URLField()
