@@ -2,7 +2,7 @@
 #	production that aren't in development.
 -r base.txt
 
-
+whitenoise
 
 # WSGI Handler
 # ------------------------------------------------
