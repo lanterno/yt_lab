@@ -10,7 +10,6 @@ YouTube Lab is a service that simply takes in a link for a playlist or a channel
 
 :License: MIT
 
-
 Settings
 --------
 
@@ -18,46 +17,15 @@ Moved to settings_.
 
 .. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
 
-Basic Commands
---------------
+Installation Steps
+--------------------
+```
+pip install -r requirements/local.txt
+sudo apt-get install redis-server
+python manage.py migrate
+```
 
-Setting Up Your Users
-^^^^^^^^^^^^^^^^^^^^^
-
-* To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
-
-* To create an **superuser account**, use this command::
-
-    $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
-
-Test coverage
-^^^^^^^^^^^^^
-
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ coverage run manage.py test
-    $ coverage html
-    $ open htmlcov/index.html
-
-Running tests with py.test
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-  $ py.test
-
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Moved to `Live reloading and SASS compilation`_.
-
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
-
-
-
-Celery
+Run Celery
 ^^^^^^
 
 This app comes with Celery.
@@ -72,9 +40,19 @@ To run a celery worker:
 
 Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
 
+Start it out
+^^^^^^^^^^^^^
 
+To run the server, simply run the following command
+```python manage.py runserver```
 
+then navigate using your browser to the following location localhost:8000/api/v1/docs
+and in the Content Source tab, start by adding a new playlist or a channel.
+try adding a link that isn't a youtube link and see what happens.
+after that, you can try and list all the sources to see if the sources are updated with right titles.
 
+After a couple of seconds from creating the source, you can checkout the videos that we have retrieved from that
+source by navigating to the videos tab and providing the id of any resource you created.
 
 Sentry
 ^^^^^^
